@@ -107,13 +107,13 @@ extern int serial1_printf(const char *__restrict __format, ...);
 //#define CFG_TUH_API_EDPT_XFER       1
 
 // Number of mass storage
-#define CFG_TUH_MSC 1
+#define CFG_TUH_MSC 0
 
 // Number of HIDs
 #define CFG_TUH_HID 4
 
 // Number of CDC interfaces
-#define CFG_TUH_CDC 1
+#define CFG_TUH_CDC 0
 
 // RX & TX fifo size
 #define CFG_TUH_CDC_RX_BUFSIZE 128

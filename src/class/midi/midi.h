@@ -71,8 +71,8 @@ typedef enum
   MIDI_CIN_SYSEX_END_1BYTE   = 5, // SysEx ends with 1 data, or 1 byte system common message
   MIDI_CIN_SYSEX_END_2BYTE   = 6, // SysEx ends with 2 data
   MIDI_CIN_SYSEX_END_3BYTE   = 7, // SysEx ends with 3 data
-  MIDI_CIN_NOTE_ON           = 8,
-  MIDI_CIN_NOTE_OFF          = 9,
+  MIDI_CIN_NOTE_ON           = 9,
+  MIDI_CIN_NOTE_OFF          = 8,
   MIDI_CIN_POLY_KEYPRESS     = 10,
   MIDI_CIN_CONTROL_CHANGE    = 11,
   MIDI_CIN_PROGRAM_CHANGE    = 12,
@@ -160,6 +160,12 @@ typedef struct TU_ATTR_PACKED
    uint8_t iJack              ;  \
   }
 
+enum
+  {
+    MIDI_MAX_DATA_VAL = 0x7F,
+  };
+
+
 /// MIDI Element Descriptor
 typedef struct TU_ATTR_PACKED
 {
@@ -200,6 +206,18 @@ typedef struct TU_ATTR_PACKED
     uint16_t bmElementCaps;     \
     uint8_t  iElement;          \
  }
+
+
+  // This descriptor follows the standard bulk data endpoint descriptor
+  typedef struct
+  {
+    uint8_t bLength            ; ///< Size of this descriptor in bytes (4+bNumEmbMIDIJack)
+    uint8_t bDescriptorType    ; ///< Descriptor Type, must be CS_ENDPOINT
+    uint8_t bDescriptorSubType ; ///< Descriptor SubType, must be MS_GENERAL
+    uint8_t bNumEmbMIDIJack;   ; ///< Number of embedded MIDI jacks associated with this endpoint
+    uint8_t baAssocJackID[];   ; ///< A list of associated jacks
+  } midi_cs_desc_endpoint_t;
+
 
 /** @} */
 
